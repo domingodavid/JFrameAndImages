@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -10,14 +12,24 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	//handles drawing animation
 	Timer animationTimer; 
-	Duck d;
+	ArrayList<Duck> myDucks1;
+	Duck[] 			myDucks2;
+	
 	
 	public void paint(Graphics g) {
 		//calling this line ensures the frame is redrawn
 		super.paintComponent(g);
 		
 		//call paint methods of objects or through g.drawRect etc
-		d.paint(g);
+		for(int i =0; i < myDucks1.size(); i++) {
+			myDucks1.get(i).paint(g);
+		}
+		
+		for(int i =0; i < myDucks2.length; i++) {
+			myDucks2[i].paint(g);
+		}
+		
+		
 	}
 	
 	/* constructor for MainPain class */
@@ -44,8 +56,16 @@ public class MainPanel extends JPanel implements ActionListener{
 		//do not forget to start the timer
 		animationTimer.start();
 			
-		//create all instnace variable objects in the constructorr
-		d = new Duck("duck.gif");
+		
+		//setup the arraylist and array of Duck objects
+		myDucks1 = new ArrayList<Duck>();
+		myDucks2 = new Duck[10];
+		
+		for(int i =0; i < 10 ; i++) {
+			myDucks2[i] = new Duck("duck.gif");
+			myDucks1.add( new Duck("duck.gif"));
+		}
+		
 		
 		f.setVisible(true);
 	}
